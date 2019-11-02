@@ -13,7 +13,7 @@ app.use(bodyParser.json());
  * Defines the port which will be used by the server to host the api.
 */
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 /*
  * All routes for the API are written in modules in the routes/ directory.  The
@@ -21,20 +21,20 @@ const port = process.env.PORT || 8000;
  * it provides all of the routes.
  */
 
-//const api = require('./Routes');
+const api = require('./Routes');
 
-//app.use('/', api);
+app.use('/', api);
 
 app.use('*', (err, req, res, next) => {
   console.error(err);
   res.status(500).send({
-    err: "A server error occurred.  Try again later."
+    error: "A 500 status server error occurred.  Try again later."
   });
 });
 
 app.use('*', function (req, res, next) {
   res.status(404).json({
-    error: "Requested resource " + req.originalUrl + " not found."
+    error: "A 404 error has occurred. Requested resource " + req.originalUrl + " not found."
   });
 });
 

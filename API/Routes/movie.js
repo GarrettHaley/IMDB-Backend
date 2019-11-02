@@ -14,3 +14,5 @@ router.get('/:titleName/actors', async (req, res) => {
 router.post('/rate', async (req, res) => {
     res.status(200).send("Rate a movie on a 1-5 scale, with a comment");
 });
+
+module.exports = router;
