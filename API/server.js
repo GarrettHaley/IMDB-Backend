@@ -25,18 +25,6 @@ const api = require('./Routes');
 
 app.use('/', api);
 
-app.use('*', (err, req, res, next) => {
-  console.error(err);
-  res.status(500).send({
-    error: "A 500 status server error occurred.  Try again later."
-  });
-});
-
-app.use('*', function (req, res, next) {
-  res.status(404).json({
-    error: "A 404 error has occurred. Requested resource " + req.originalUrl + " not found."
-  });
-});
 
 app.listen(port, function() {
   console.log("== Server is running on port", port);
