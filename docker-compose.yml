@@ -5,5 +5,32 @@ services:
     image: imdb-api
     restart: always
     ports:
-      - 8000:8000
-   
+      - ${API_PORT}:${API_PORT}
+  mysql:
+    image: mysql:5
+    restart: always
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db-init/:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    volumes:
+      - ./db-init/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    environment:
+      PMA_HOST: mysql
+    ports:
+      - ${PHP_ADMIN_PORT}:${PHP_ADMIN_PORT}
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
+    name: asgard-mysql-data
