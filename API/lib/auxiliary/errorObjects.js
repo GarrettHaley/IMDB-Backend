@@ -1,5 +1,5 @@
 
-const error404 = {
+const error500 = {
     "error": {
     "errors": [
       {
@@ -12,7 +12,7 @@ const error404 = {
     }
 };
 
-const error500 = {
+const error404 = {
     "error": {
      "errors": [
       {

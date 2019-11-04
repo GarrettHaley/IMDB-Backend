@@ -13,9 +13,6 @@ const router = require('express').Router();
 router.get('/:actor/movies', async (req, res) => {
     try {
       const moviesPage = await getMoviesPage(parseInt(req.query.page) || 1, req.params.actor );
-      console.log(moviesPage,"LOOK HEREEEE!!!");
-      if(moviesPage == null)
-        res.status(404).send(error404);
       res.status(200).send(moviesPage);
     } catch (err) {
       console.error(err);

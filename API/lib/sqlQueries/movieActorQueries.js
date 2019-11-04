@@ -1,110 +1,36 @@
 const mysqlPool = require('./../auxiliary/mysqlPool');
 
-  function getActorIDByName(actor) {
+
+  function getMoviesByActor(actor) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(
-        'SELECT nconst FROM actors WHERE name = ?',
+        'SELECT title FROM `movies` m JOIN `movie-actors` ma ON m.tconst = ma.tconst JOIN `actors` a ON ma.nconst = a.nconst WHERE upper(a.name) = ?',
         [ actor ],
         (err, results) => {
           if (err || results == null) {
             reject(err);
           } else {
-                resolve(results[0].nconst);
+                resolve(results);
           }
         }
       );
     });
   }
+  exports.getMoviesByActor = getMoviesByActor;
 
-  exports.getActorIDByName = getActorIDByName;
-
-  function getMovieIDByTitle(title) {
+  function getActorsByMovie(movie) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(
-        'SELECT tconst FROM movies WHERE title = ?',
-        [ title ],
+        'SELECT name FROM `actors` a JOIN `movie-actors` ma ON a.nconst = ma.nconst JOIN `movies` m ON ma.tconst = m.tconst WHERE upper(m.title) = ?',
+        [ movie ],
         (err, results) => {
           if (err || results == null) {
             reject(err);
           } else {
-                resolve(results[0].tconst);
+                resolve(results);
           }
         }
       );
     });
   }
-
-  exports.getMovieIDByTitle = getMovieIDByTitle;
-
-  function getMovieIDsByActorID(actorID) {
-    return new Promise((resolve, reject) => {
-      mysqlPool.query(
-        'SELECT tconst FROM `movie-actors` WHERE nconst = ?',
-        [ actorID ],
-        (err, results) => {
-          if (err) {
-            reject(err);
-          } 
-          else {
-            resolve(results);
-          }
-        }
-      );
-    });
-  }
-
-  exports.getMovieIDsByActorID = getMovieIDsByActorID;
-
-  function getActorIDsByMovieID(movieID) {
-    return new Promise((resolve, reject) => {
-      mysqlPool.query(
-        'SELECT nconst FROM movie-actors WHERE tconst = ?',
-        [ movieID ],
-        (err, results) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        }
-      );
-    });
-  }
-
-  exports.getActorIDsByMovieID = getActorIDsByMovieID;
-
-  function getMovieTitlesByMovieIDs(movieIDs) {
-    return new Promise((resolve, reject) => {
-      mysqlPool.query(
-        'SELECT title FROM movies WHERE tconst IN (?)',
-        [ movieIDs ],
-        (err, results) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        }
-      );
-    });
-  }
-
-  exports.getMovieTitlesByMovieIDs =  getMovieTitlesByMovieIDs;
-
-  function getActorsByActorIDs(actorIDs) {
-    return new Promise((resolve, reject) => {
-      mysqlPool.query(
-        'SELECT name FROM actors WHERE nconst IN (?)',
-        [ actorIDs ],
-        (err, results) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(results);
-          }
-        }
-      );
-    });
-  }
-
-  exports.getActorsByActorIDs =  getActorsByActorIDs;
+  exports.getActorsByMovie = getActorsByMovie;

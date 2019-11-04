@@ -1,3 +1,4 @@
+const { error404 } = require('./lib/auxiliary/errorObjects')
 /*
  * Express and body-parser are popular npm packages used for routing and parsing purposes.
  */
@@ -25,6 +26,9 @@ const api = require('./Routes');
 
 app.use('/', api);
 
+app.use('*', function (req, res, next) {
+  res.status(404).send(error404);
+});
 
 app.listen(port, function() {
   console.log("== Server is running on port", port);
