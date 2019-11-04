@@ -16,6 +16,7 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
       );
     });
   }
+
   exports.getMoviesByActor = getMoviesByActor;
 
   function getActorsByMovie(movie) {
@@ -36,11 +37,11 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
   exports.getActorsByMovie = getActorsByMovie;
 
 
-  function getMovieDataAboveReview(reviewValue) {
+  function getMovieDataAboveReview(reviewValue, offset, pageSize) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(
-        'SELECT m.title FROM `movies` m JOIN `reviews` r ON m.tconst = r.tconst WHERE r.rating > ? ',
-        [ reviewValue ],
+        'SELECT m.title FROM `movies` m JOIN `reviews` r ON m.tconst = r.tconst WHERE r.rating > ? LIMIT ?,? ',
+        [ reviewValue, offset, pageSize ],
         (err, results) => {
           if (err || results == null) {
             reject(err);
@@ -52,3 +53,20 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
     });
   }
   exports.getMovieDataAboveReview = getMovieDataAboveReview;
+
+  function getMovieDataAboveReviewCount(reviewValue) {
+    return new Promise((resolve, reject) => {
+      mysqlPool.query(
+        'SELECT COUNT(*) AS count FROM `movies` m JOIN `reviews` r ON m.tconst = r.tconst WHERE r.rating > ? ',
+        [ reviewValue ],
+        (err, results) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(results[0].count);
+          }
+        }
+      );
+    });
+  }
+  exports.getMovieDataAboveReviewCount = getMovieDataAboveReviewCount;
