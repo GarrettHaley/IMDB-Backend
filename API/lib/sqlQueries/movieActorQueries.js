@@ -1,6 +1,6 @@
 const mysqlPool = require('./../auxiliary/mysqlPool');
 
-function getActorIDByName(actor) {
+  function getActorIDByName(actor) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(
         'SELECT nconst FROM actors WHERE name = ?',
@@ -17,6 +17,24 @@ function getActorIDByName(actor) {
   }
 
   exports.getActorIDByName = getActorIDByName;
+
+  function getMovieIDByTitle(title) {
+    return new Promise((resolve, reject) => {
+      mysqlPool.query(
+        'SELECT tconst FROM movies WHERE title = ?',
+        [ title ],
+        (err, results) => {
+          if (err || results == null) {
+            reject(err);
+          } else {
+                resolve(results[0].tconst);
+          }
+        }
+      );
+    });
+  }
+
+  exports.getMovieIDByTitle = getMovieIDByTitle;
 
   function getMovieIDsByActorID(actorID) {
     return new Promise((resolve, reject) => {
@@ -72,3 +90,21 @@ function getActorIDByName(actor) {
   }
 
   exports.getMovieTitlesByMovieIDs =  getMovieTitlesByMovieIDs;
+
+  function getActorsByActorIDs(actorIDs) {
+    return new Promise((resolve, reject) => {
+      mysqlPool.query(
+        'SELECT name FROM actors WHERE nconst IN (?)',
+        [ actorIDs ],
+        (err, results) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(results);
+          }
+        }
+      );
+    });
+  }
+
+  exports.getActorsByActorIDs =  getActorsByActorIDs;

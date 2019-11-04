@@ -1,4 +1,5 @@
 const { getActorIDByName } = require('./../sqlQueries/movieActorQueries');
+const { getMovieIDByTitle } = require('./../sqlQueries/movieActorQueries');
 const { getMovieIDsByActorID } = require('./../sqlQueries/movieActorQueries');
 const { getMovieTitlesByMovieIDs } = require('./../sqlQueries/movieActorQueries');
 
