@@ -34,3 +34,21 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
     });
   }
   exports.getActorsByMovie = getActorsByMovie;
+
+
+  function getMoviesAboveReview(reviewValue) {
+    return new Promise((resolve, reject) => {
+      mysqlPool.query(
+        'SELECT a.name,m.title FROM `actors` a JOIN `movie-actors` ma ON a.nconst = ma.nconst JOIN `movies` m ON ma.tconst = m.tconst JOIN `reviews` r ON m.tconst = r.tconst WHERE r.rating > ? ',
+        [ reviewValue ],
+        (err, results) => {
+          if (err || results == null) {
+            reject(err);
+          } else {
+                resolve(results);
+          }
+        }
+      );
+    });
+  }
+  exports.getMoviesAboveReview = getMoviesAboveReview;

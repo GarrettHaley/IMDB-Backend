@@ -1,5 +1,5 @@
 const { error500 } = require('./../lib/auxiliary/errorObjects');
-const {getActorsPage} = require('./../lib/auxiliary/pagination')
+const {getActorsPage} = require('./../lib/pagination/actorsPagination')
 /* 
  * The following routes provide the following functionality:
     1. Search for names of actors in a given movie.

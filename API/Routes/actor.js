@@ -1,6 +1,5 @@
-const { error404 } = require('./../lib/auxiliary/errorObjects');
 const { error500 } = require('./../lib/auxiliary/errorObjects');
-const {getMoviesPage} = require('./../lib/auxiliary/pagination')
+const {getMoviesPage} = require('./../lib/pagination/moviesPagination')
 /* 
  * The following routes provide the following functionality:
     1. Search for names of movies an actor has appeared in.
