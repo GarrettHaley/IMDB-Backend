@@ -36,10 +36,10 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
   exports.getActorsByMovie = getActorsByMovie;
 
 
-  function getMoviesAboveReview(reviewValue) {
+  function getMovieDataAboveReview(reviewValue) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(
-        'SELECT a.name,m.title FROM `actors` a JOIN `movie-actors` ma ON a.nconst = ma.nconst JOIN `movies` m ON ma.tconst = m.tconst JOIN `reviews` r ON m.tconst = r.tconst WHERE r.rating > ? ',
+        'SELECT m.title FROM `movies` m JOIN `reviews` r ON m.tconst = r.tconst WHERE r.rating > ? ',
         [ reviewValue ],
         (err, results) => {
           if (err || results == null) {
@@ -51,4 +51,4 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
       );
     });
   }
-  exports.getMoviesAboveReview = getMoviesAboveReview;
+  exports.getMovieDataAboveReview = getMovieDataAboveReview;
