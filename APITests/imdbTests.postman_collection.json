@@ -1,0 +1,378 @@
+{
+	"info": {
+		"_postman_id": "21ac5511-9e06-41a0-a52c-d24afbb6fa26",
+		"name": "imdbTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "insertReview",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a4b6d26-7886-471a-ba37-9daefada9bf7",
+						"exec": [
+							"tests[\"status code is 200\"] = responseCode.code === 201;",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"title\": \"rumba\",\n\"rating\": 4.7,\n\"comment\":\"fantastic movie, wow.\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip_address}}:8000/movie/rate",
+					"protocol": "http",
+					"host": [
+						"{{ip_address}}"
+					],
+					"port": "8000",
+					"path": [
+						"movie",
+						"rate"
+					]
+				},
+				"description": "This should test the api's ability to insert reviews."
+			},
+			"response": []
+		},
+		{
+			"name": "insertReviewFailureTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a4b6d26-7886-471a-ba37-9daefada9bf7",
+						"exec": [
+							"tests[\"status code is 400\"] = responseCode.code === 400;",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"shouldcause400\": \"400 error requested\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip_address}}:8000/movie/rate",
+					"protocol": "http",
+					"host": [
+						"{{ip_address}}"
+					],
+					"port": "8000",
+					"path": [
+						"movie",
+						"rate"
+					]
+				},
+				"description": "This should test the api's ability to insert reviews."
+			},
+			"response": []
+		},
+		{
+			"name": "incorrectPathTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a4b6d26-7886-471a-ba37-9daefada9bf7",
+						"exec": [
+							"tests[\"status code is 404\"] = responseCode.code === 404;",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip_address}}:8000/incorrectpath",
+					"protocol": "http",
+					"host": [
+						"{{ip_address}}"
+					],
+					"port": "8000",
+					"path": [
+						"incorrectpath"
+					]
+				},
+				"description": "This should test the api's ability to insert reviews."
+			},
+			"response": []
+		},
+		{
+			"name": "actorsFromMovieTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a4b6d26-7886-471a-ba37-9daefada9bf7",
+						"exec": [
+							"tests[\"status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip_address}}:8000/movie/top%20hat/actors",
+					"protocol": "http",
+					"host": [
+						"{{ip_address}}"
+					],
+					"port": "8000",
+					"path": [
+						"movie",
+						"top%20hat",
+						"actors"
+					]
+				},
+				"description": "This should test the api's ability to insert reviews."
+			},
+			"response": []
+		},
+		{
+			"name": "moviesFromActorTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a4b6d26-7886-471a-ba37-9daefada9bf7",
+						"exec": [
+							"tests[\"status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip_address}}:8000/actor/fred%20Astaire/movies",
+					"protocol": "http",
+					"host": [
+						"{{ip_address}}"
+					],
+					"port": "8000",
+					"path": [
+						"actor",
+						"fred%20Astaire",
+						"movies"
+					]
+				},
+				"description": "This should test the api's ability to insert reviews."
+			},
+			"response": []
+		},
+		{
+			"name": "AboveRatingTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a4b6d26-7886-471a-ba37-9daefada9bf7",
+						"exec": [
+							"tests[\"status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip_address}}:8000/movies/rating/2",
+					"protocol": "http",
+					"host": [
+						"{{ip_address}}"
+					],
+					"port": "8000",
+					"path": [
+						"movies",
+						"rating",
+						"2"
+					]
+				},
+				"description": "This should test the api's ability to insert reviews."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
