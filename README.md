@@ -16,7 +16,7 @@
 
 **Accomplishing the Requirements**
 - (1&2) I created a dockerized mysql database which contains roughly 140,000 entries pulled from the imdb website. I have divided the data into 4 respective tables: actors, reviews, movies, and movie-actors. Each table is in third normal form, and contains tconst/nconst keys as followed the imdb data format found here: https://www.imdb.com/interfaces/. Primary and foreign keys have been arranged between tables. To look at the database, login to the phpmyadmin container (directions below).
-- (3) I created a dockerized nodejs server which is able to make one POST request and three GET requests to satisfy the API requirements above. The three post requests following HATEOAS URL conventions and all contain paginated JSON responses. The POST request extracts necessary input fields from the request body and uploads the result to the respective table. Input sanitization has not been performed, and only trivial error handeling.
+- (3) I created a dockerized nodejs server which is able to make one POST request and three GET requests to satisfy the API requirements above. The three post requests following HATEOAS URL conventions and all contain paginated JSON responses. The POST request extracts necessary input fields from the request body and uploads the result to the respective table. Input sanitization has not been performed, and only trivial error handling.
 
 
 # Deployment Guide
