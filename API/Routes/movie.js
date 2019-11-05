@@ -42,7 +42,7 @@ router.get('/:movie/actors', async (req, res) => {
 */
 
 router.post('/rate', async (req, res) => {
-  if (validateAgainstSchema(req.body, reviewInputSchema) && parseInt(req.body.rating) < 5 && parseInt(req.body.rating) > 0){
+  if (validateAgainstSchema(req.body, reviewInputSchema) && parseInt(req.body.rating) <= 5 && parseInt(req.body.rating) > 0){
     try{
       const tconst = await getMovieIDByTitle(req.body.title);
       req.body.tconst = tconst;

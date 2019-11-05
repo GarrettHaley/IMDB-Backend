@@ -4,6 +4,10 @@ const {
     getMovieDataAboveReviewCount
 } = require('../sqlQueries/movieActorQueries');
 
+const {
+    error400
+} = require('../auxiliary/errorObjects');
+
 /*
  * Executes a MySQL query to return a single page of movies and reviews.  Returns a
  * Promise that resolves to an paginated response containing the fetched page of movies/reviews above a given rating.
@@ -24,8 +28,15 @@ function getMoviesDataPage(page, reviewValue) {
         var movieReviewData = [];
         var actors = []
         const movieData = await getMovieDataAboveReview(reviewValue, offset, pageSize);
-        if (movieData == null) {
-            reject(true);
+        if (movieData == null || movieData.length == 0) {
+            resolve({
+                movies: [],
+                page: 0,
+                totalPages: 0,
+                pageSize: 10,
+                count: 0,
+                links: {}
+            });
         } else if (movieData.length > 1) {
             const movies = new Set(movieData.map(function(movie) {
                 return movie.title
