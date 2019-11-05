@@ -1,6 +1,23 @@
 const mysqlPool = require('./../auxiliary/mysqlPool');
 
+  function getMovieIDByTitle(movieID) {
+    return new Promise((resolve, reject) => {
+      mysqlPool.query(
+        'SELECT tconst FROM `movies` m WHERE upper(m.title) = ?',
+        [ movieID ],
+        (err, results) => {
+          if (err || results == null) {
+            reject(err);
+          } else {
+              resolve(results[0].tconst);
+          }
+        }
+      );
+    });
+  }
 
+  exports.getMovieIDByTitle = getMovieIDByTitle;
+  
   function getMoviesByActor(actor) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(

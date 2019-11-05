@@ -12,6 +12,19 @@ const error500 = {
     }
 };
 
+const error400 = {
+  "error": {
+  "errors": [
+    {
+     "reason": "Invalid request body",
+     "message": "Your request could not be processed due to an invalid request body."
+    }
+  ],
+   "code": 400,
+   "message": "Unable to access requested resource due to an invalid request body."
+  }
+};
+
 const error404 = {
     "error": {
      "errors": [
@@ -26,3 +39,4 @@ const error404 = {
     }
   exports.error404 = error404;
   exports.error500 = error500;
+  exports.error400 = error400;
