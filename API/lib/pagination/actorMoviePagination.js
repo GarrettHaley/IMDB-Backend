@@ -31,7 +31,7 @@ function getMoviesDataPage(page, reviewValue) {
                 return movie.title
             }));
             for (var set = movies.values(), movie = null; movie = set.next().value;) {
-                actors = getActorsByMovie(movie);
+                actors = await getActorsByMovie(movie);
                 movieReviewData.push({
                     movie: movie,
                     actors: actors

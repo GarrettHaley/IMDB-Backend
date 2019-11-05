@@ -36,8 +36,13 @@ router.get('/:movie/actors', async (req, res) => {
   }
 });
 
+/* 
+* The following route performs basic evaluation on request, extracts desired data from the request,
+   and inserts that data as a review to the reviews table.
+*/
+
 router.post('/rate', async (req, res) => {
-  if (validateAgainstSchema(req.body, reviewInputSchema)){
+  if (validateAgainstSchema(req.body, reviewInputSchema) && parseInt(req.body.rating) < 5 && parseInt(req.body.rating) > 0){
     try{
       const tconst = await getMovieIDByTitle(req.body.title);
       req.body.tconst = tconst;
