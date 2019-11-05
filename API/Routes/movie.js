@@ -48,7 +48,18 @@ router.post('/rate', async (req, res) => {
       req.body.tconst = tconst;
       const validReview = extractValidFields(req.body, reviewSchema);
       await insertNewReview(validReview);
-      res.status(201).send({msg: "Review was successfully inserted"});
+      res.status(201).send({
+        "success": {
+         "successes": [
+          {
+           "reason": "review inserted",
+           "message": "The review has been inserted into the database."
+          }
+         ],
+         "code": 201,
+         "message": "Review insertion was successful."
+         }
+        });
     } catch (err){
       console.log(err);
       res.status(500).send(error500);
