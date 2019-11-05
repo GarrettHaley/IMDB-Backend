@@ -19,12 +19,12 @@ const {
 const {
   getMovieIDByTitle
 } = require('../lib/sqlQueries/movieActorQueries');
-/* 
-* The following route provide the following functionality:
-  1. Search for names of actors in a given movie.
-  2. Rate a movie on a 1-5 scale, with a comment.
-*/
+
 const router = require('express').Router();
+
+/* 
+* The following route gets a movie title and generates a list of actors in a paginated response.
+*/
 
 router.get('/:movie/actors', async (req, res) => {
   try {

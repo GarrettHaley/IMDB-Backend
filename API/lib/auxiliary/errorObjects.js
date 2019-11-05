@@ -1,4 +1,6 @@
-
+/*
+ * Various default responses for 400, 404, and 500 errors.
+ */
 const error500 = {
     "error": {
     "errors": [

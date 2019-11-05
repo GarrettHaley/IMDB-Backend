@@ -1,5 +1,9 @@
 const mysqlPool = require('./../auxiliary/mysqlPool');
 
+/* 
+* The following function attempts to select a movies ID given its name.
+*/
+
   function getMovieIDByTitle(movieID) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(
@@ -17,6 +21,10 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
   }
 
   exports.getMovieIDByTitle = getMovieIDByTitle;
+
+/* 
+* The following function attempts to select all movies an actor has been in.
+*/
   
   function getMoviesByActor(actor) {
     return new Promise((resolve, reject) => {
@@ -36,6 +44,10 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
 
   exports.getMoviesByActor = getMoviesByActor;
 
+/* 
+* The following function attempts to select all actor names given the movie title.
+*/
+
   function getActorsByMovie(movie) {
     return new Promise((resolve, reject) => {
       mysqlPool.query(
@@ -53,6 +65,9 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
   }
   exports.getActorsByMovie = getActorsByMovie;
 
+/* 
+* The following function attempts to select movie titles where the movie has been reviewed above a specified value.
+*/
 
   function getMovieDataAboveReview(reviewValue, offset, pageSize) {
     return new Promise((resolve, reject) => {
@@ -70,6 +85,10 @@ const mysqlPool = require('./../auxiliary/mysqlPool');
     });
   }
   exports.getMovieDataAboveReview = getMovieDataAboveReview;
+
+/* 
+* The following function attempts to count the number of movie titles that have been reviewed above a specified value.
+*/
 
   function getMovieDataAboveReviewCount(reviewValue) {
     return new Promise((resolve, reject) => {

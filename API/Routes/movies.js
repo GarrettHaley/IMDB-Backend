@@ -2,12 +2,12 @@ const {
     getMoviesDataPage
 } = require('./../lib/pagination/actorMoviePagination')
 
-/* 
- * The following routes provide the following functionality:
-    1. Search movies with a rating above a set value, and return both the movie name and the actors in it.
-*/
-
 const router = require('express').Router();
+
+/* 
+* The following route returns a paginated response of movies with their corresponding actors which have 
+  been a review above a specifed rating.
+*/
 
 router.get('/rating/:movieRating', async (req, res) => {
     try {

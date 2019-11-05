@@ -4,11 +4,10 @@ const {
 const {
   getMoviesPage
 } = require('./../lib/pagination/moviesPagination')
-/* 
-* The following routes provide the following functionality:
-  1. Search for names of movies an actor has appeared in.
 
-  Fetches page info, generates HATEOAS links for surrounding pages.
+/* 
+* The following routes returns a paginated list of all movies an actor has 
+  been in.provide the following functionality:
 */
 
 const router = require('express').Router();
